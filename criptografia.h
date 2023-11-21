@@ -1,8 +1,9 @@
 #ifndef CRIPTOGRAFIA_H
 #define CRIPTOGRAFIA_H
 
+#include "leitura.h"
 #include <openssl/sha.h>
 
-void criptografarSenhaFraca(const char *senhaFraca, unsigned char hashCriptografado[SHA256_DIGEST_LENGTH]);
+void criptografarSenha2(SenhaFraca *senhasFracas, int tamanhoSenhasFracas);
 
-#endif
+#endif // CRIPTOGRAFIA_H

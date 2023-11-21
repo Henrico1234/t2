@@ -1,8 +1,9 @@
-/*#ifndef COMPARARSENHAS_H
-#define COMPARARSENHAS_H
+#ifndef QUEBRA_H
+#define QUEBRA_H
 
 #include "leitura.h"
+#include <openssl/sha.h>
 
-void compararSenhas(pessoa *usuarios, int tamanhoUsuarios, SenhaFraca *senhasFracas, int tamanhoSenhasFracas);
+int* quebrarSenhas(pessoa *pessoas, int tamanhoPessoas, SenhaFraca *senhasFracas, int tamanhoSenhasFracas);
 
-#endif
+#endif // QUEBRA_H

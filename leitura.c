@@ -13,15 +13,16 @@ void leitura1(FILE *arqUsuarios, pessoa *pessoas, int *tamanhoPessoas) {
                   pessoas[*tamanhoPessoas].login, pessoas[*tamanhoPessoas].senha,
                   pessoas[*tamanhoPessoas].data2) == 5) {
 
-        if (fscanf(arqUsuarios, "%*[^\n]\n") == EOF) {
-            break; // Sai do loop se não conseguir pular a linha
-        }
-
-        // Processa os dados da pessoa (você pode imprimir ou fazer o que quiser)
+        printf("Lendo pessoa %d:\n", *tamanhoPessoas + 1);
         printf("Nome: %s\nData de Nascimento: %s\nLogin: %s\nSenha: %s\nData2: %s\n\n",
                pessoas[*tamanhoPessoas].nome, pessoas[*tamanhoPessoas].data,
                pessoas[*tamanhoPessoas].login, pessoas[*tamanhoPessoas].senha,
                pessoas[*tamanhoPessoas].data2);
+
+        if (fscanf(arqUsuarios, "%*[^\n]\n") == EOF) {
+            break; // Sai do loop se não conseguir pular a linha
+        }
+
         (*tamanhoPessoas)++;
 
         if (*tamanhoPessoas == capacidade) {
@@ -33,6 +34,10 @@ void leitura1(FILE *arqUsuarios, pessoa *pessoas, int *tamanhoPessoas) {
             }
         }
     }
+        printf("Nome: %s\nData de Nascimento: %s\nLogin: %s\nSenha: %s\nData2: %s\n\n",
+               pessoas[2].nome, pessoas[2].data,
+               pessoas[2].login, pessoas[2].senha,
+               pessoas[2].data2);
 
 }
 

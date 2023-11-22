@@ -1,21 +1,28 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "string.h"
+#include <string.h>
 #include "quebra.h"
-#include "criptografia.h"
 #include <openssl/sha.h>
 
 
-int* quebrarSenhas(pessoa *pessoas, int tamanhoPessoas, SenhaFraca *senhasFracas, int tamanhoSenhasFracas) {
 
+void quebrarSenhas(pessoa *pessoas, int tamanhoPessoas, SenhaFraca *senhasFracas, int tamanhoSenhasFracas, int *indicesPessoas, int *indicesSenhasFracas, int *quantidadeCorrespondentes) {
+    *quantidadeCorrespondentes = 0;  // Inicializa a quantidade de correspondentes
 
-    for (int i = 0; i < tamanhoPessoas; i++) {
-        for (int j = 0; j < tamanhoSenhasFracas; j++) {
-            // Comparar senhas criptografadas
+    printf("%d\n", tamanhoPessoas);
+    for (int i = 0; i < tamanhoPessoas ; i++) {
+        for (int j = 0; j < tamanhoSenhasFracas; j++) { 
+            printf("%d\n", j);  
+                      printf("Comparando: %s com %s\n", pessoas[i].senha, senhasFracas[j].senhacrip);
             if (strcmp(pessoas[i].senha, senhasFracas[j].senhacrip) == 0) {
-                // Senha encontrada, faça algo aqui
-                printf("Senha quebrada para a pessoa %s\n", pessoas[i].nome);
+                // Senha correspondente encontrada, armazena o índice
+                indicesPessoas[*quantidadeCorrespondentes] = i;
+                indicesSenhasFracas[*quantidadeCorrespondentes] = j;
+                (*quantidadeCorrespondentes)++;
+                
+                printf("Senha correspondente Índice Pessoa: %d, Índice SenhaFracas: %d\n", i, j);
             }
         }
+        printf("ssss%d\n", i);
     }
 }

@@ -1,25 +1,23 @@
 #include <stdio.h>
+#include <string.h>
 #include "saida.h"
 
-void imprimirPessoasQuebradas(pessoa* pessoas, int* indicesQuebrados, int tamanhoPessoas, SenhaFraca* senhasFracas) {
-    // Abre ou cria o arquivo de saída
-    FILE* arquivoSaida = fopen("saida.txt", "w");
-    if (arquivoSaida == NULL) {
-        printf("Erro ao abrir o arquivo de saída\n");
-        return;
-    }
+void imprimir(int *indices, int *indices2, int quantidade, pessoa *pessoas, SenhaFraca *senhasFracas) {
+    printf("Índices Correspondentes:\n");
 
-    // Loop para imprimir as informações das pessoas que tiveram as senhas quebradas
-    for (int i = 0; i < tamanhoPessoas; i++) {
-        if (indicesQuebrados[i] != -1) {
-            fprintf(arquivoSaida, "Login: %s\n", pessoas[i].login);
-            fprintf(arquivoSaida, "Data de Nascimento: %s\n", pessoas[i].data);
-            fprintf(arquivoSaida, "Nome: %s\n", pessoas[i].nome);
-            fprintf(arquivoSaida, "Senha: %s\n", senhasFracas[indicesQuebrados[i]].senha2);
-            fprintf(arquivoSaida, "---\n");
-        }
-    }
+    for (int i = 0; i < quantidade; i++) {
+        int indice = indices[i];
 
-    // Fecha o arquivo de saída
-    fclose(arquivoSaida);
+        // Imprime informações da pessoa com base no índice
+        printf("Índice: %d\n", indice);
+        printf("Login: %s\n", pessoas[indice].login);
+        printf("Nome: %s\n", pessoas[indice].nome);
+        printf("Data: %s\n", pessoas[indice].data);
+
+        // Se desejar, também pode imprimir informações da struct SenhaFraca
+        // Lembre-se de ajustar conforme a estrutura real da struct SenhaFraca
+        printf("Senha Criptografada: %s\n", senhasFracas[indice].senha2);
+
+        printf("\n");
+    }
 }

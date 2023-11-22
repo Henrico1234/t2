@@ -3,6 +3,6 @@
 
 #include "leitura.h"
 
-void imprimirPessoasQuebradas(pessoa* pessoas, int* indicesQuebrados, int tamanhoPessoas, SenhaFraca* senhasFracas);
+void imprimir(int *indices, int *indices2, int quantidade, pessoa *pessoas, SenhaFraca *senhasFracas);
 
 #endif // SAIDA_H

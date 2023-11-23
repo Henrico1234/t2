@@ -2,22 +2,18 @@
 #include <string.h>
 #include "saida.h"
 
-void imprimir(int *indices, int *indices2, int quantidade, pessoa *pessoas, SenhaFraca *senhasFracas) {
-    printf("Índices Correspondentes:\n");
 
-    for (int i = 0; i < quantidade; i++) {
-        int indice = indices[i];
 
-        // Imprime informações da pessoa com base no índice
-        printf("Índice: %d\n", indice);
-        printf("Login: %s\n", pessoas[indice].login);
-        printf("Nome: %s\n", pessoas[indice].nome);
-        printf("Data: %s\n", pessoas[indice].data);
+void imprimirCorrespondencias( pessoa *pessoas, int tamanhoPessoas, SenhaFraca *senhasFracas, int tamanhoSenhasFracas, int *indicesPessoas, int *indicesSenhasFracas, int quantidadeCorrespondentes,FILE *arqSaida) {
 
-        // Se desejar, também pode imprimir informações da struct SenhaFraca
-        // Lembre-se de ajustar conforme a estrutura real da struct SenhaFraca
-        printf("Senha Criptografada: %s\n", senhasFracas[indice].senha2);
 
-        printf("\n");
+    for (int i = 0; i < quantidadeCorrespondentes; i++) {
+        int indicePessoa = indicesPessoas[i];
+        int indiceSenhaFraca = indicesSenhasFracas[i];
+
+        // Imprime informações da pessoa
+          fprintf(arqSaida, "Login: %s\nSenha: %s\nNome: %s\nData: %s\n---\n",
+               pessoas[indicePessoa].login, senhasFracas[indiceSenhaFraca].senha2,
+               pessoas[indicePessoa].nome, pessoas[indicePessoa].data);
     }
 }

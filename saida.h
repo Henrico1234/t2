@@ -1,8 +1,9 @@
+// saida.h
 #ifndef SAIDA_H
 #define SAIDA_H
 
 #include "leitura.h"
 
-void imprimir(int *indices, int *indices2, int quantidade, pessoa *pessoas, SenhaFraca *senhasFracas);
+void imprimirCorrespondencias(pessoa *pessoas, int tamanhoPessoas, SenhaFraca *senhasFracas, int tamanhoSenhasFracas, int *indicesPessoas, int *indicesSenhasFracas, int quantidadeCorrespondentes, FILE *arqSaida);
 
-#endif // SAIDA_H
+#endif

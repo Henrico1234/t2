@@ -8,8 +8,9 @@
 #include "saida.h"
 
 int main(int argc, char *argv[]) {
-    FILE *arqUsuarios = fopen(argv[1], "r+");
-    FILE *arqSenhasFracas = fopen(argv[2], "r+");
+    FILE *arqUsuarios = fopen(argv[1], "r");
+    FILE *arqSenhasFracas = fopen(argv[2], "r");
+    FILE *arqSaida = fopen(argv[3], "w");
 
     int tamanhoPessoas = 0;
     int tamanhoSenhasFracas = 0;
@@ -22,39 +23,31 @@ int main(int argc, char *argv[]) {
         printf("Erro");
         return 1;
     }
-    leitura1(arqUsuarios, pessoas, &tamanhoPessoas);
-    leitura2(arqSenhasFracas, senhasFracas, &tamanhoSenhasFracas);
+    leitura1(arqUsuarios, &pessoas, &tamanhoPessoas);
+    leitura2(arqSenhasFracas, &senhasFracas, &tamanhoSenhasFracas);
+
     fflush(stdin);
     criptografarSenha2(senhasFracas, tamanhoSenhasFracas);
-        for (int i = 0; i < tamanhoSenhasFracas; i++) {
-        printf("Senha Original: %s\nSenha Criptografada: %s\n\n", senhasFracas[i].senha2, senhasFracas[i].senhacrip);
-    } 
-    printf("Nome: %s\nData de Nascimento: %s\nLogin: %s\nSenha: %s\nData2: %s\n\n",
-               pessoas[2].nome, pessoas[2].data,
-               pessoas[2].login, pessoas[2].senha,
-               pessoas[2].data2);
-
-    int indicesPessoas[tamanhoPessoas];
-    int indicesSenhasFracas[tamanhoSenhasFracas];
+   
+    int *indicesPessoas;
+    int *indicesSenhasFracas;
     int quantidadeCorrespondentes = 0;
 
-    quebrarSenhas(pessoas, tamanhoPessoas, senhasFracas, tamanhoSenhasFracas, indicesPessoas, indicesSenhasFracas, &quantidadeCorrespondentes);
-   
-       // Imprime os índices correspondentes
-    printf("Índices Pessoas:\n");
-    for (int i = 0; i < quantidadeCorrespondentes; i++) {
-        printf("%d ", indicesPessoas[i]);
-    }
-    printf("\n");
+    indicesPessoas = malloc(2 * sizeof(int));
+    indicesSenhasFracas = malloc(2 * sizeof(int));
 
-    printf("Índices SenhasFracas:\n");
-    for (int i = 0; i < quantidadeCorrespondentes; i++) {
-        printf("%d ", indicesSenhasFracas[i]);
-    }
-    printf("\n");
+    quebrarSenhas(pessoas, tamanhoPessoas, senhasFracas, tamanhoSenhasFracas, &indicesPessoas, &indicesSenhasFracas, &quantidadeCorrespondentes);
 
+
+ 
   
-    //imprimir(indicesCorrespondentes, quantidadeCorrespondentes, pessoas, senhasFracas);
+    imprimirCorrespondencias(pessoas, tamanhoPessoas, senhasFracas, tamanhoSenhasFracas, indicesPessoas, indicesSenhasFracas, quantidadeCorrespondentes, arqSaida);
+
+    // Libera memória
+    free(indicesPessoas);
+    free(indicesSenhasFracas);
+    free(pessoas);
+    free(senhasFracas);
 
     fclose(arqUsuarios);
     fclose(arqSenhasFracas);

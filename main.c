@@ -51,6 +51,7 @@ int main(int argc, char *argv[]) {
 
     fclose(arqUsuarios);
     fclose(arqSenhasFracas);
+    
 
     return 0;
 }
